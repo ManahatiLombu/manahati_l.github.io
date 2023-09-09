@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kalkulator Sederhana</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    #calculator {
+      width: 300px;
+      height: 370px;
+      margin: 0 auto;
+      border: 3px solid #891313;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(184, 21, 21, 0.2);
+      background-color:burlywood;
+    }
+    input[type="text"] {
+      width: 240px;
+      height: 40px;
+      margin: 5px;
+      font-size: 18px;
+    }
+    input[type="button"] {
+      width: 60px;
+      height: 40px;
+      margin: 5px;
+      font-size: 18px;
+      transition: background-color 0.3s;
+      border: none; /* Menghilangkan border tombol */
+      cursor: pointer; /* Mengubah kursor saat mengarahkan ke tombol */
+    }
+    input[type="button"]:hover {
+      background-color: lightgray;
+    }
+    input[type="button"]:active {
+      background-color: lightcoral;
+    }
+    .calc-button.orange { background-color: orange; }
+    .calc-button.green { background-color: limegreen; }
+    .calc-button.blue { background-color: lightblue; }
+    .calc-button.red { background-color: tomato; }
+    .calc-button.purple { background-color: mediumorchid; }
+    .calc-button.yellow { background-color: gold; }
+    #result {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+  </style>  
+</head>
+<body>
+  <div id="calculator">
+    <input type="text" id="display" readonly>
+    <div id="result"></div>
+    <br> 
+    <input type="button" value="%" onclick="calculatePercentage()" class="calc-button orange">
+    <input type="button" value="C" onclick="clearDisplay()" class="calc-button red">
+    <input type="button" value="CE" onclick="clearEntry()" class="calc-button red">
+    <input type="button" value="+" onclick="addToDisplay('+')" class="calc-button yellow">
+    <br>
+    <input type="button" value="7" onclick="addToDisplay('7')" class="calc-button blue">
+    <input type="button" value="8" onclick="addToDisplay('8')" class="calc-button blue">
+    <input type="button" value="9" onclick="addToDisplay('9')" class="calc-button blue">
+    <input type="button" value="-" onclick="addToDisplay('-')" class="calc-button yellow">
+    <br>
+    <input type="button" value="4" onclick="addToDisplay('4')" class="calc-button blue">
+    <input type="button" value="5" onclick="addToDisplay('5')" class="calc-button blue">
+    <input type="button" value="6" onclick="addToDisplay('6')" class="calc-button blue">
+    <input type="button" value="/" onclick="addToDisplay('/')" class="calc-button yellow">
+    <br>
+    <input type="button" value="1" onclick="addToDisplay('1')" class="calc-button blue">
+    <input type="button" value="2" onclick="addToDisplay('2')" class="calc-button blue">
+    <input type="button" value="3" onclick="addToDisplay('3')" class="calc-button blue">
+    <input type="button" value="*" onclick="addToDisplay('*')" class="calc-button yellow">
+    <br>
+    <input type="button" value="+/-" onclick="addToDisplay('+/-')" class="calc-button purple">
+    <input type="button" value="0" onclick="addToDisplay('0')" class="calc-button blue">
+    <input type="button" value="." onclick="addToDisplay('.')" class="calc-button blue">
+    <input type="button" value="=" onclick="calculate()" class="calc-button green">
+    <br>
+  </div>
+
+  <script>
+    function addToDisplay(value) {
+      const display = document.getElementById('display');
+      if (value === '+/-') {
+        if (display.value.startsWith('-')) {
+          display.value = display.value.slice(1);
+        } else {
+          display.value = '-' + display.value;
+        }
+      } else {
+        display.value += value;
+      }
+    }
+
+    function clearDisplay() {
+      document.getElementById('display').value = '';
+      document.getElementById('result').innerText = '';
+    }
+
+    function clearEntry() {
+      const display = document.getElementById('display');
+      display.value = display.value.slice(0, -1);
+    }
+
+    function calculatePercentage() {
+      const expression = document.getElementById('display').value;
+      try {
+        const result = eval(expression) / 100;
+        document.getElementById('display').value = result;
+        document.getElementById('result').innerText = result;
+      } catch (error) {
+        document.getElementById('result').innerText = 'Error';
+      }
+    }
+
+    function calculate() {
+      const expression = document.getElementById('display').value;
+      try {
+        const result = eval(expression);
+        document.getElementById('result').innerText = result;
+      } catch (error) {
+        document.getElementById('result').innerText = 'Error';
+      }
+    }
+  </script>
+</body>
+</html>
